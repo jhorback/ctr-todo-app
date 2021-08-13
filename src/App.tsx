@@ -1,43 +1,38 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
+import "@material/mwc-top-app-bar-fixed";
+import "@material/mwc-icon-button";
 import './App.scss'
+import './AppDocumentStyles.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const toggleTheme = () => {
+    document.querySelector("html")?.classList.toggle("dark-theme");
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <mwc-top-app-bar-fixed>
+        <div slot="navigationIcon">
+          <img src={logo} className="app-logo" alt="logo" height="32"/>
+        </div>
+        <div slot="title">
+          TODO <span>- CONNECT.TECH</span>
+        </div>
+        <div slot="actionItems">          
+          <mwc-icon-button
+            icon="settings_brightness"  
+            onClick={toggleTheme}
+          ></mwc-icon-button>
+        </div>
+      </mwc-top-app-bar-fixed>
+      <div className="content-body">
+        CONTENT BODY HERE
+        {/* <ctn-todo-content .state="${this.state}"></ctn-todo-content>
+        <ctn-done-content .state="${this.state}"></ctn-done-content>
+        <ctn-images-list .state="${this.state}"></ctn-images-list> */}
+      </div>
     </div>
   )
 }
