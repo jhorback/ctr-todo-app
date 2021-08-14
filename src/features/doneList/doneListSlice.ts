@@ -14,9 +14,7 @@ export const doneListSlice = createSlice({
     initialState,
     reducers: {
       deleteCompleted: (state) => {
-        // doesn't seem to work
-        console.log("deleteCompleted - not working?")
-        state = [];
+        state.splice(0);
       },
       deleteDoneItem: (state, action: PayloadAction<number>) => {
         state.splice(action.payload, 1);

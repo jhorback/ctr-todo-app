@@ -13,7 +13,6 @@ export const DoneList = () => {
     const dispatch = useDispatch();
 
     const doneItemsCount = useSelector<RootState, number>(state => state.doneItems.length);
-
     const listElementRef = React.createRef<HTMLDivElement>();
     const iconButtonRef = React.createRef<HTMLElement>();
 
@@ -29,7 +28,7 @@ export const DoneList = () => {
     };
 
     return (
-        <div className="DoneList">    
+        <div className="DoneList" hidden={doneItemsCount === 0}>    
             <div className="content">
                 <div className="completed-toolbar"
                     onClick={toggleShowContent}
