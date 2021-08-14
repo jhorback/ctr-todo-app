@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import { TodoItem, TodoListName } from "../../app/store";
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { RootState } from "../../app/store";
@@ -18,7 +18,7 @@ import "@material/mwc-icon";
  *   Slices reduce the elegance of this sort of freedom
  *   Adding custom event listeners is cumbersome, unintuitive, hook magic
  *   Requireing a key on a list should not be neccessary
- *   Events don't have stopImmediatePropagation
+ *   Events don't have stopImmediatePropagation (SyntheticEvent)
  *   Event order is not in natural addListener order.
  */
 
@@ -31,8 +31,10 @@ export const ItemsList = (listName:TodoListName) => {
         listName === TodoListName.TodoItems ? state.todoItems : state.doneItems
     );
     const state = useStore().getState() as RootState;
+
+    let isDeleting = false;
     
-    const listSelected = (event:any) => {
+    const onListAction = (event:any) => {
         const {index} = event.detail;
 
         // sync the list element
@@ -40,33 +42,41 @@ export const ItemsList = (listName:TodoListName) => {
             /*@ts-ignore*/
             listElementRef.current?.select(new Set()) :
             /*@ts-ignore*/
-            listElementRef.current?.toggle(index);
-       
+            listElementRef.current?.toggle(index);       
 
-        if (listName === TodoListName.TodoItems) {
-            const itemText = state.todoItems[index].text;
-            dispatch(deleteTodoItem(index));
-            dispatch(addDoneItem(itemText));
-        } else {
-            const itemText = state.doneItems[index].text;
-            dispatch(deleteDoneItem(index));
-            dispatch(addTodoItem(itemText));
-        }
+        setTimeout(() => {
+            if (isDeleting) {
+                isDeleting = false;
+                return;
+            }
+
+            if (listName === TodoListName.TodoItems) {
+                const itemText = state.todoItems[index].text;
+                dispatch(deleteTodoItem(index));
+                dispatch(addDoneItem(itemText));
+            } else {
+                const itemText = state.doneItems[index].text;
+                dispatch(deleteDoneItem(index));
+                dispatch(addTodoItem(itemText));
+            }
+        });
+        
     };
 
-    const deleteItem = (event:Event, index:number, text:string) => {
-        event.stopPropagation();
+    const deleteItem = (event:any, index:number) => {
+        isDeleting = true;       
+        event.nativeEvent?.stopPropagation();
         listName === TodoListName.TodoItems ?
             dispatch(deleteTodoItem(index)) :
             dispatch(deleteDoneItem(index));
     };
 
     // listener for custom event
-    useEffect(() => {
+    useLayoutEffect(() => {
         const el = listElementRef.current;
-        el?.addEventListener("action", listSelected);
+        el?.addEventListener("action", onListAction);
         return () => {
-            el?.removeEventListener("action", listSelected);
+            el?.removeEventListener("action", onListAction);
         };
     });
 
@@ -83,7 +93,7 @@ export const ItemsList = (listName:TodoListName) => {
                             key={index}
                         >
                           {item.text}
-                          <mwc-icon slot="meta" onClick={(e:Event) => deleteItem(e, index, item.text)}>delete</mwc-icon>
+                          <mwc-icon slot="meta" onClick={(e:Event) => deleteItem(e, index)}>delete</mwc-icon>
                       </mwc-check-list-item> 
                     ))
                 }
