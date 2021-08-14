@@ -5,8 +5,9 @@
       margin: 1rem auto;
       max-width:1200px;
   }
+
+  mwc-top-app-bar-fixed {
+    --mdc-theme-primary: #282c34;
+  }
 }
 
-mwc-top-app-bar-fixed {
-  --mdc-theme-primary: #282c34;
-}

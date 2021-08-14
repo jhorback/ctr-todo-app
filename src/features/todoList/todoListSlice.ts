@@ -1,30 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../app/store';
+import type { RootState, TodoItem } from '../../app/store';
 
 
-interface TodoItem {
-    text: string,
-    done: boolean
-};
 
-const initialState: Array<TodoItem> = [];
+
+const initialState: Array<TodoItem> = [{
+  text: "INITIAL ITEM FROM STORE",
+  done: false
+}];
 
 
 export const todoListSlice = createSlice({
     name: 'todoItems',
     initialState,
     reducers: {
-      addTodo: (state, action: PayloadAction<string>) => {
+      addTodoItem: (state, action: PayloadAction<string>) => {
         state.unshift({
             text: action.payload,
             done: false
         });
+      },
+      deleteTodoItem: (state, action: PayloadAction<number>) => {
+        state.splice(action.payload, 1);
       }
     }
 });
 
 
-export const { addTodo } = todoListSlice.actions
+export const { addTodoItem, deleteTodoItem } = todoListSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type
