@@ -22,7 +22,7 @@ export const doneListSlice = createSlice({
       addDoneItem: (state, action: PayloadAction<string>) => {
         state.unshift({
             text: action.payload,
-            done: false
+            done: true
         });
       }
     }

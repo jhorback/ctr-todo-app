@@ -34,6 +34,15 @@ export const ItemsList = (listName:TodoListName) => {
     
     const listSelected = (event:any) => {
         const {index} = event.detail;
+
+        // sync the list element
+        listName === TodoListName.TodoItems ?
+            /*@ts-ignore*/
+            listElementRef.current?.select(new Set()) :
+            /*@ts-ignore*/
+            listElementRef.current?.toggle(index);
+       
+
         if (listName === TodoListName.TodoItems) {
             const itemText = state.todoItems[index].text;
             dispatch(deleteTodoItem(index));
@@ -70,7 +79,7 @@ export const ItemsList = (listName:TodoListName) => {
                     items.map((item, index) => (
                         <mwc-check-list-item left hasMeta
                             {...itemSelectedProp(item)}                  
-                            class="done"
+                            class={item.done ? "done" : ""}
                             key={index}
                         >
                           {item.text}
