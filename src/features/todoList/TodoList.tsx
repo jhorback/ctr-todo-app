@@ -2,6 +2,7 @@ import React from "react";
 import { RootState } from "../../app/store";
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodoItem } from "./todoListSlice";
+import { searchForImages } from "../imageList/imageListSlice";
 import { TodoListName } from "../../app/store";
 import "@material/mwc-textfield"
 import "./TodoList.scss";
@@ -15,7 +16,9 @@ export const TodoList = () => {
 
     const newTaskKeyUp = (event:any) => {
         if (event.key === "Enter") {
-            dispatch(addTodoItem(event.target.value));
+            const text = event.target.value
+            dispatch(addTodoItem(text));
+            dispatch(searchForImages(text));
             event.target.value = "";
         }
     };

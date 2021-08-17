@@ -6,6 +6,7 @@ import './App.scss';
 import './AppDocumentStyles.scss';
 import {TodoList} from "./features/todoList/TodoList";
 import {DoneList} from "./features/doneList/DoneList";
+import {ImageList} from "./features/imageList/ImageList";
 
 function App() {
   
@@ -33,9 +34,7 @@ function App() {
       <div className="content-body">
         {TodoList()}
         {DoneList()}
-        {/* <ctn-todo-content .state="${this.state}"></ctn-todo-content>
-        <ctn-done-content .state="${this.state}"></ctn-done-content>
-        <ctn-images-list .state="${this.state}"></ctn-images-list> */}
+        {ImageList()}
       </div>
     </div>
   )

@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState, TodoItem } from '../../app/store';
 
 
-
-
 const initialState: Array<TodoItem> = [{
   text: "INITIAL ITEM FROM STORE",
   done: false
@@ -25,6 +23,7 @@ export const todoListSlice = createSlice({
       }
     }
 });
+
 
 
 export const { addTodoItem, deleteTodoItem } = todoListSlice.actions

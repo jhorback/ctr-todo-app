@@ -7,5 +7,6 @@ declare namespace JSX {
         "mwc-list": any;
         "mwc-check-list-item": any;
         "mwc-button": any;
+        "mwc-circular-progress": any;
     }
 }
