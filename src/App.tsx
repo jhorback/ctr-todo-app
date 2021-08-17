@@ -22,7 +22,7 @@ function App() {
           <img src={logo} className="app-logo" alt="logo" height="32"/>
         </div>
         <div slot="title">
-          TODO <span>- CONNECT.TECH</span>
+          TODO <span>- REACT/REDUX</span>
         </div>
         <div slot="actionItems">          
           <mwc-icon-button
