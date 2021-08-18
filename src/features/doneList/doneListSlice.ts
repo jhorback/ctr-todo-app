@@ -3,10 +3,7 @@ import type { RootState, TodoItem } from '../../app/store';
 
 
 
-const initialState: Array<TodoItem> = [{
-  text: "INITIAL ITEM FROM STORE - DONE",
-  done: true
-}];
+const initialState: Array<TodoItem> = [];
 
 
 export const doneListSlice = createSlice({
