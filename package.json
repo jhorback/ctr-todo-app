@@ -9,7 +9,7 @@
     "@material/mwc-button": "0.22.1",
     "@material/mwc-icon": "0.22.1",
     "@material/mwc-icon-button": "0.22.1",
-    "@material/mwc-list": "0.22.1",
+    "@material/mwc-list": "0.27.0",
     "@material/mwc-textfield": "0.22.1",
     "@material/mwc-top-app-bar-fixed": "0.22.1",
     "@material/typography": "13.0.0",
