@@ -13,7 +13,7 @@
     "@material/mwc-textfield": "0.22.1",
     "@material/mwc-top-app-bar-fixed": "0.22.1",
     "@material/typography": "13.0.0",
-    "@reduxjs/toolkit": "1.6.1",
+    "@reduxjs/toolkit": "1.9.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.4"
